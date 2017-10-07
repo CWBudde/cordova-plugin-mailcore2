@@ -20,8 +20,8 @@
         <param name="ios-package" value="CDVMailCore2" />
       </feature>
     </config-file>
-    <header-file src="src/ios/mailcore2.h"/>
-    <source-file src="src/ios/mailcore2.m"/>
+    <header-file src="src/ios/CDVMailCore2.h"/>
+    <source-file src="src/ios/CDVMailCore2.m"/>
     <framework src="CFNetwork.framework" />
     <framework src="Security.framework" />
   </platform>
