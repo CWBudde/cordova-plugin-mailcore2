@@ -22,7 +22,9 @@
     </config-file>
     <header-file src="src/ios/CDVMailCore2.h"/>
     <source-file src="src/ios/CDVMailCore2.m"/>
+    <source-file src="src/ios/libMailCore-ios.a" framework="true" />
     <framework src="CFNetwork.framework" />
     <framework src="Security.framework" />
+    <framework src="MailCore.framework" />
   </platform>
 </plugin>
