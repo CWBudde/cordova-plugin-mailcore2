@@ -14,14 +14,14 @@
  * limitations under the License.
  */
  
-#import "CDVMailCore.h"
+#import "CDVMailCore2.h"
 #import "MailCore2.h"
 
 @implementation CDVMailCore2
 
 - (void)cordovaSendMail:(CDVInvokedUrlCommand*)command
 {
-	self.CallbackId = command.callbackId;
+	self.callbackId = command.callbackId;
 
 	NSDictionary* options = command.arguments[0];
 
