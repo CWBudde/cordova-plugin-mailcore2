@@ -25,13 +25,14 @@
 
 	NSDictionary* options = command.arguments[0];
 
-	NSString *from = [options objectForKey:@"emailFrom"];
-	NSString *to = [options objectForKey:@"emailTo"];
-	NSString *bcc = [options objectForKey:@"bcc"];
-	NSString *smtpServer = [options objectForKey:@"Server"];
-	NSString *smtpPort = [options objectForKey:@"Port"];
-	NSString *smtpUsername = [options objectForKey:@"UserName"];
-	NSString *smtpPassword = [options objectForKey:@"Password"];
+	NSString *fromEmail = [options objectForKey:@"fromEmail"];
+	NSString *toName = [options objectForKey:@"toName"];
+	NSString *toEmail = [options objectForKey:@"toEmail"];
+	NSString *smtpServer = [options objectForKey:@"smtpServer"];
+	NSString *smtpPort = [options objectForKey:@"smtpPort"];
+	NSString *smtpUsername = [options objectForKey:@"smtpUserName"];
+	NSString *smtpPassword = [options objectForKey:@"smtpPassword"];
+	NSString *textSubject = [options objectForKey:@"textSubject"];
 	NSString *textBody = [options objectForKey:@"textBody"];
 
 	MCOSMTPSession *smtpSession = [[MCOSMTPSession alloc] init];
@@ -43,39 +44,27 @@
 
 	MCOMessageBuilder * builder = [[MCOMessageBuilder alloc] init];
 	[[builder header] setFrom:[MCOAddress addressWithDisplayName:nil mailbox:USERNAME]];
+
 	NSMutableArray *to = [[NSMutableArray alloc] init];
-	for(NSString *toAddress in RECIPIENTS) {
-    MCOAddress *newAddress = [MCOAddress addressWithMailbox:toAddress];
+    MCOAddress *newAddress = [MCOAddress addressWithMailbox:toEmail];
     [to addObject:newAddress];
-	}
 	[[builder header] setTo:to];
-	NSMutableArray *cc = [[NSMutableArray alloc] init];
-	for(NSString *ccAddress in CC) {
-    MCOAddress *newAddress = [MCOAddress addressWithMailbox:ccAddress];
-    [cc addObject:newAddress];
-	}
-	[[builder header] setCc:cc];
-	NSMutableArray *bcc = [[NSMutableArray alloc] init];
-	for(NSString *bccAddress in BCC) {
-    MCOAddress *newAddress = [MCOAddress addressWithMailbox:bccAddress];
-    [bcc addObject:newAddress];
-	}
-	[[builder header] setBcc:bcc];
-	[[builder header] setSubject:SUBJECT];
-	[builder setHTMLBody:BODY];
+
+	[[builder header] setSubject:textSubject];
+	[builder setHTMLBody:textBody];
 	NSData * rfc822Data = [builder data];
 
 	MCOSMTPSendOperation *sendOperation = [smtpSession sendOperationWithData:rfc822Data];
 	[sendOperation start:^(NSError *error) {
     if(error) {
-      NSLog(@"%@ Error sending email:%@", USERNAME, error);
+      NSLog(@"%@ Error sending email:%@", smtpUsername, error);
 			CDVPluginResult *pluginResult = [
 				CDVPluginResult resultWithStatus : CDVCommandStatus_OK
 			];				
 
 			[self.commandDelegate sendPluginResult:pluginResult callbackId:self.CallbackId];
     } else {
-      NSLog(@"%@ Successfully sent email!", USERNAME);
+      NSLog(@"%@ Successfully sent email!", smtpUsername);
 			CDVPluginResult *pluginResult = [ 
 				CDVPluginResult resultWithStatus: CDVCommandStatus_OK
 			];
