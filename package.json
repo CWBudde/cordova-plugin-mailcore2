@@ -3,12 +3,12 @@
   "version": "0.0.1",
   "description": "Cordova plugin that exposes the interface of mailcore2",
   "cordova": {
-		"id": "cordova-plugin-mailcore2",
-	  "platforms":[
-			"ios"
-		]
-	},
-	"repository": {
+    "id": "cordova-plugin-mailcore2",
+    "platforms":[
+      "ios"
+    ]
+  },
+  "repository": {
     "type": "git",
     "url": "https://github.com/CWBudde/cordova-plugin-mailcore2.git"
   },
