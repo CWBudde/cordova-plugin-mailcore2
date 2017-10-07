@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         id="cordova-plugin-mailcore2" version="0.0.1">
     
-  <name>mailcore2</name>
+  <name>MailCore2</name>
 	<description>Cordova plugin that exposes the interface of mailcore2</description>	
   <license>Apache 2.0</license>
 	<keywords>cordova,smtp,imap,mailcore2,email</keywords>
