@@ -20,12 +20,16 @@
         <param name="ios-package" value="CDVMailCore2" />
       </feature>
     </config-file>
+    <framework src="CFNetwork.framework" />
+    <framework src="Security.framework" />
+    <framework src="src/ios/MailCore.framework" custom="true" weak="true" />
+    <framework src="libstdc++.dylib"/>
+    <framework src="libsasl2.dylib"/>
+    <framework src="libxml2.dylib"/>
+    <framework src="libz.dylib"/>
     <header-file src="src/ios/CDVMailCore2.h"/>
     <source-file src="src/ios/CDVMailCore2.m"/>
     <header-file src="src/ios/MailCore.framework/Headers/MailCore.h" />
     <source-file src="src/ios/libMailCore-ios.a" framework="true" />
-    <framework src="src/ios/MailCore.framework" custom="true" weak="true" />
-    <framework src="CFNetwork.framework" />
-    <framework src="Security.framework" />
   </platform>
 </plugin>
