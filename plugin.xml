@@ -30,6 +30,7 @@
     <source-file src="src/ios/CDVMailCore2.m"/>
     <header-file src="src/ios/MailCore.framework/Headers/MailCore.h" />
     <source-file src="src/ios/libMailCore-ios.a" framework="true" />
-    <framework src="mailcore2-ios" type="podspec"/>
+    <framework src="mailcore2-ios" type="podspec" spec="~> 0.6.4"/>
+<framework src="mailcore2-ios" type="podspec"/>
   </platform>
 </plugin>
