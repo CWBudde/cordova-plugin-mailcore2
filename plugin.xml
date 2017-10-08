@@ -24,7 +24,6 @@
     <framework src="Security.framework" />
     <framework src="src/ios/MailCore.framework" custom="true" weak="true" />
     <framework src="libstdc++.dylib"/>
-    <framework src="libsasl2.dylib"/>
     <framework src="libxml2.dylib"/>
     <framework src="libz.dylib"/>
     <header-file src="src/ios/CDVMailCore2.h"/>
