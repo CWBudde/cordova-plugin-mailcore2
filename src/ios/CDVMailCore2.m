@@ -46,8 +46,8 @@
 	[[builder header] setFrom:[MCOAddress addressWithDisplayName:nil mailbox:smtpUsername]];
 
 	NSMutableArray *to = [[NSMutableArray alloc] init];
-    MCOAddress *newAddress = [MCOAddress addressWithMailbox:toEmail];
-    [to addObject:newAddress];
+	MCOAddress *newAddress = [MCOAddress addressWithMailbox:toEmail];
+	[to addObject:newAddress];
 	[[builder header] setTo:to];
 
 	[[builder header] setSubject:textSubject];
@@ -56,21 +56,21 @@
 
 	MCOSMTPSendOperation *sendOperation = [smtpSession sendOperationWithData:rfc822Data];
 	[sendOperation start:^(NSError *error) {
-    if(error) {
-      NSLog(@"%@ Error sending email:%@", smtpUsername, error);
+		if(error) {
+			NSLog(@"%@ Error sending email:%@", smtpUsername, error);
 			CDVPluginResult *pluginResult = [
 				CDVPluginResult resultWithStatus : CDVCommandStatus_OK
 			];				
 
 			[self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
-    } else {
-      NSLog(@"%@ Successfully sent email!", smtpUsername);
+		} else {
+			NSLog(@"%@ Successfully sent email!", smtpUsername);
 			CDVPluginResult *pluginResult = [ 
 				CDVPluginResult resultWithStatus: CDVCommandStatus_OK
 			];
-	
+
 			[self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
-    }
+		}
 	}];
 }
 
