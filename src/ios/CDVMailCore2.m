@@ -34,6 +34,7 @@
 	NSString *smtpPassword = [options objectForKey:@"smtpPassword"];
 	NSString *textSubject = [options objectForKey:@"textSubject"];
 	NSString *textBody = [options objectForKey:@"textBody"];
+	NSString *textAttachment = [options objectForKey:@"textAttachment"];
 
 	MCOSMTPSession *smtpSession = [[MCOSMTPSession alloc] init];
 	smtpSession.hostname = smtpServer;
@@ -52,8 +53,13 @@
 
 	[[builder header] setSubject:textSubject];
 	[builder setHTMLBody:textBody];
-	NSData * rfc822Data = [builder data];
 
+	if (textAttachment) {
+		MCOAttachment *attachment = [MCOAttachment attachmentWithText:textAttachment];
+    	[builder addAttachment:attachment];
+	}
+	
+	NSData * rfc822Data = [builder data];
 	MCOSMTPSendOperation *sendOperation = [smtpSession sendOperationWithData:rfc822Data];
 	[sendOperation start:^(NSError *error) {
 		if(error) {
