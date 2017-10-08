@@ -15,7 +15,7 @@
  */
  
 #import "CDVMailCore2.h"
-#import "MailCore.h"
+#include <MailCore/MailCore.h>
 
 @implementation CDVMailCore2
 
