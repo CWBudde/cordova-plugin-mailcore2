@@ -15,7 +15,7 @@
  */
  
 #import "CDVMailCore2.h"
-#import "MailCore2.h"
+#import "MailCore.h"
 
 @implementation CDVMailCore2
 
@@ -43,7 +43,7 @@
 	smtpSession.connectionType = MCOConnectionTypeTLS;
 
 	MCOMessageBuilder * builder = [[MCOMessageBuilder alloc] init];
-	[[builder header] setFrom:[MCOAddress addressWithDisplayName:nil mailbox:USERNAME]];
+	[[builder header] setFrom:[MCOAddress addressWithDisplayName:nil mailbox:smtpUsername]];
 
 	NSMutableArray *to = [[NSMutableArray alloc] init];
     MCOAddress *newAddress = [MCOAddress addressWithMailbox:toEmail];
@@ -62,14 +62,14 @@
 				CDVPluginResult resultWithStatus : CDVCommandStatus_OK
 			];				
 
-			[self.commandDelegate sendPluginResult:pluginResult callbackId:self.CallbackId];
+			[self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
     } else {
       NSLog(@"%@ Successfully sent email!", smtpUsername);
 			CDVPluginResult *pluginResult = [ 
 				CDVPluginResult resultWithStatus: CDVCommandStatus_OK
 			];
 	
-			[self.commandDelegate sendPluginResult:pluginResult callbackId:self.CallbackId];
+			[self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
     }
 	}];
 }
