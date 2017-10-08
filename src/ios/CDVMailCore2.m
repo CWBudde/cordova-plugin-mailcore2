@@ -29,7 +29,7 @@
 	NSString *toName = [options objectForKey:@"toName"];
 	NSString *toEmail = [options objectForKey:@"toEmail"];
 	NSString *smtpServer = [options objectForKey:@"smtpServer"];
-	NSString *smtpPort = [options objectForKey:@"smtpPort"];
+	NSNumber smtpPort = [options objectForKey:@"smtpPort"];
 	NSString *smtpUsername = [options objectForKey:@"smtpUserName"];
 	NSString *smtpPassword = [options objectForKey:@"smtpPassword"];
 	NSString *textSubject = [options objectForKey:@"textSubject"];
@@ -57,18 +57,16 @@
 	MCOSMTPSendOperation *sendOperation = [smtpSession sendOperationWithData:rfc822Data];
 	[sendOperation start:^(NSError *error) {
 		if(error) {
-			NSLog(@"%@ Error sending email:%@", smtpUsername, error);
+			NSLog(@"Error sending email: %@", error);
+
 			CDVPluginResult *pluginResult = [
-				CDVPluginResult resultWithStatus : CDVCommandStatus_OK
+				CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[error localizedDescription]
 			];				
 
 			[self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
 		} else {
-			NSLog(@"%@ Successfully sent email!", smtpUsername);
-			CDVPluginResult *pluginResult = [ 
-				CDVPluginResult resultWithStatus: CDVCommandStatus_OK
-			];
-
+			NSLog(@"Successfully sent email!");
+			CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 			[self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
 		}
 	}];
