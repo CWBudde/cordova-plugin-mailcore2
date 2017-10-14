@@ -55,8 +55,8 @@
 	[builder setHTMLBody:textBody];
 
 	if (textAttachment) {
-		MCOAttachment *attachment = [MCOAttachment attachmentWithText:textAttachment];
-    	[builder addAttachment:attachment];
+		MCOAttachment *attachment = [MCOAttachment attachmentWithHTMLString:textAttachment];
+		[builder addAttachment:attachment];
 	}
 	
 	NSData * rfc822Data = [builder data];
