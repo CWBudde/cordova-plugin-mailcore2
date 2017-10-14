@@ -25,9 +25,11 @@
 
 	NSDictionary* options = command.arguments[0];
 
+	NSString *fromName = [options objectForKey:@"fromName"];
 	NSString *fromEmail = [options objectForKey:@"fromEmail"];
 	NSString *toName = [options objectForKey:@"toName"];
 	NSString *toEmail = [options objectForKey:@"toEmail"];
+	NSString *replyEmail = [options objectForKey:@"replyEmail"];
 	NSString *smtpServer = [options objectForKey:@"smtpServer"];
 	int smtpPort = [[options objectForKey:@"smtpPort"] intValue];
 	NSString *smtpUsername = [options objectForKey:@"smtpUserName"];
@@ -44,10 +46,11 @@
 	smtpSession.connectionType = MCOConnectionTypeTLS;
 
 	MCOMessageBuilder * builder = [[MCOMessageBuilder alloc] init];
-	[[builder header] setFrom:[MCOAddress addressWithDisplayName:nil mailbox:smtpUsername]];
+	[[builder header] setFrom:[MCOAddress addressWithDisplayName:fromName mailbox:fromEmail]];
+//	[[builder header] setReplyTo:[MCOAddress addressWithMailbox:replyEmail]];
 
 	NSMutableArray *to = [[NSMutableArray alloc] init];
-	MCOAddress *newAddress = [MCOAddress addressWithMailbox:toEmail];
+	MCOAddress *newAddress = [MCOAddress addressWithDisplayName:toName mailbox:toEmail];
 	[to addObject:newAddress];
 	[[builder header] setTo:to];
 
