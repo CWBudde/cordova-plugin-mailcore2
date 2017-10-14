@@ -23,9 +23,11 @@ So far only the mail sending capacibilities of the MailCore2 library are exposed
 To send an email you must first provide the required options as such
 
     var mailSettings = {
+        fromName: "Name of Sender",
         fromEmail: "sender@domain.com",
         toName: "Name of the Receiver",
         toEmail: "receiver@domain.com",
+        replyEmail: "reply-to@domain.com",
         smtpServer: "smtp-mail.domain.com",
         smtpPort: 465,
         smtpUserName: "authuser@domain.com",
