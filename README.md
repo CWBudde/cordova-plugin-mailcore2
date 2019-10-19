@@ -33,7 +33,8 @@ To send an email you must first provide the required options as such
         smtpUserName: "authuser@domain.com",
         smtpPassword: "password",
         textSubject: "email subject",
-        textBody: "email body"
+        textBody: "email body",
+        connectionLogger: false
     };
             
     var success = function {

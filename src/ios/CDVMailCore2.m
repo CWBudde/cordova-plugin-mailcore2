@@ -37,6 +37,7 @@
 	NSString *textSubject = [options objectForKey:@"textSubject"];
 	NSString *textBody = [options objectForKey:@"textBody"];
 	NSString *textAttachment = [options objectForKey:@"textAttachment"];
+  bool connectionLogger = [[options objectForKey:@"connectionLogger"] boolValue]; 
 
 	MCOSMTPSession *smtpSession = [[MCOSMTPSession alloc] init];
 	smtpSession.hostname = smtpServer;
@@ -62,6 +63,12 @@
 		[builder addAttachment:attachment];
 	}
 	
+	if (connectionLogger) {
+    smtpSession.connectionLogger = ^(void * connectionID, MCOConnectionLogType type, NSData * data) {
+      NSLog(@"smtp session[%li] %@", (long)type, [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    }
+  }
+            
 	NSData * rfc822Data = [builder data];
 	MCOSMTPSendOperation *sendOperation = [smtpSession sendOperationWithData:rfc822Data];
 	[sendOperation start:^(NSError *error) {
